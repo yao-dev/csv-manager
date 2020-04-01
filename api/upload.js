@@ -1,6 +1,7 @@
 const Papa = require('papaparse')
 const fs = require('fs')
 const multer = require('multer')
+const pako = require('pako')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -21,7 +22,7 @@ module.exports = (req, res) => {
       // An unknown error occurred when uploading.
     }
 
-    fs.readFile(req.file.path, { encoding: 'utf8' }, (err, data) => {
+    fs.readFile(pako.ungzip(req.file.path), { encoding: 'utf8' }, (err, data) => {
       if (err) return res.status(500).send(err)
 
       const result = Papa.parse(data, {

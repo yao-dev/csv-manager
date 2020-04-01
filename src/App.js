@@ -8,6 +8,7 @@ import Highlighter from 'react-highlight-words';
 import { Resizable } from 'react-resizable';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import './App.css';
+import pako from 'pako';
 
 const API = axios.create({
   baseURL: 'https://csv-manager.now.sh/api',
@@ -599,6 +600,10 @@ class App extends Component {
           accept={'text/csv'}
           action={'https://csv-manager.now.sh/api/upload'}
           onChange={this.handleUpload}
+          header={{
+            'Content-Encoding': 'gzip'
+          }}
+          transformFile={(file) => pako.gzip(file)}
         >
           <p className="ant-upload-drag-icon">
             <Icon type="file" />

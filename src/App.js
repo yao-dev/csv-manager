@@ -9,6 +9,10 @@ import { Resizable } from 'react-resizable';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import './App.css';
 
+const API = axios.create({
+  baseURL: 'https://csv-manager.now.sh/api',
+});
+
 // const Uppy = require('@uppy/core')
 // const XHRUpload = require('@uppy/xhr-upload')
 
@@ -575,7 +579,7 @@ class App extends Component {
   submitFilter = async (filters) => {
     this.setState({ confirmLoading: true })
     try {
-      const { data } = await axios.post('http://localhost:3001/filter', {
+      const { data } = await API.post('/filter', {
         fileName: this.state.fileName,
         filters: filters || this.state.filters,
       })
@@ -593,7 +597,7 @@ class App extends Component {
           name={'csv'}
           multiple={false}
           accept={'text/csv'}
-          action={'http://localhost:3001/upload'}
+          action={'https://csv-manager.now.sh/api/upload'}
           onChange={this.handleUpload}
         >
           <p className="ant-upload-drag-icon">

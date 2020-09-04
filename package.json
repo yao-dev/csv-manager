@@ -16,7 +16,7 @@
     "multer": "^1.4.1",
     "nodemon": "^1.18.10",
     "pako": "^1.0.11",
-    "papaparse": "^4.6.3",
+    "papaparse": "^5.2.0",
     "react": "^16.8.5",
     "react-csv": "^1.1.1",
     "react-dom": "^16.8.5",
